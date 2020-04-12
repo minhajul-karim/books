@@ -1,0 +1,25 @@
+{% extends "search_result.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        {% if results %}
+        {% for result in results %}
+        <div class="card mb-3">
+            <a class="card-block stretched-link text-decoration-none"
+                href="{{ url_for('.book', book_id=result["id"]) }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ result["title"] | title }}</h5>
+                    <p class="card-text">{{ result["author"] | title }}</p>
+                    <p class="card-text"><small class="text-muted">Date of publication: {{ result["year"] }}</small></p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="lead text-center">No result found!</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
