@@ -18,30 +18,30 @@
 <div class="row">
     <div class="col">
         <h3>Ratings and Reviews</h3>
-        {% if session.username %}
+        {% if session.username and not past_review %}
         <!-- Source: https://stackoverflow.com/questions/29893259/rating-system-with-stars -->
-        <form action="{{ url_for('.test') }}" method="POST">
+        <form action="{{ url_for('.book') }}" method="POST">
             <fieldset class="rating">
-                <input type="radio" id="star5" name="rating" value="5" />
+                <input type="radio" id="star5" name="rating" value="5">
                 <label for="star5">5 stars</label>
-                <input type="radio" id="star4" name="rating" value="4" />
+                <input type="radio" id="star4" name="rating" value="4">
                 <label for="star4">4 stars</label>
-                <input type="radio" id="star3" name="rating" value="3" />
+                <input type="radio" id="star3" name="rating" value="3">
                 <label for="star3">3 stars</label>
-                <input type="radio" id="star2" name="rating" value="2" />
+                <input type="radio" id="star2" name="rating" value="2">
                 <label for="star2">2 stars</label>
-                <input type="radio" id="star1" name="rating" value="1" />
+                <input type="radio" id="star1" name="rating" value="1">
                 <label for="star1">1 star</label>
             </fieldset>
             <div class="form-group">
                 <input type="text" class="form-control" id="rating" name="rating" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
-                <textarea class="form-control" rows="4" placeholder="Write a review.."></textarea>
+                <textarea class="form-control" name="comment" rows="4" placeholder="Write a review.."></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        {% else %}
+        {% elif not session.username %}
         <p class="lead text-center py-3">
             Please log in to write review.
             <button type="submit" class="btn btn-outline-primary ml-2">Log in</button>
@@ -49,6 +49,7 @@
         {% endif %}
     </div>
 </div>
+
 <hr>
 <div class="row">
     <div class="col-md-6">
@@ -60,6 +61,7 @@
             before writing a reveiw. Otherwise, a message to log in will be displayed.</p>
     </div>
 </div>
+
 <hr>
 <div class="row">
     <div class="col-md-6">
@@ -71,6 +73,7 @@
             before writing a reveiw. Otherwise, a message to log in will be displayed.</p>
     </div>
 </div>
+
 <hr>
 <div class="row">
     <div class="col-md-6">
@@ -82,5 +85,4 @@
             before writing a reveiw. Otherwise, a message to log in will be displayed.</p>
     </div>
 </div>
-<hr>
 {% endblock %}

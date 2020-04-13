@@ -32,16 +32,30 @@
       {% if session.username %}
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" href="#">Logged in as: {{ session.username }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_bp.logout') }}">Logout</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_bp.logout') }}">Log Out</a></li>
       </ul>
       {% else %}
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_bp.signup') }}">Signup</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_bp.signup') }}">Sign Up</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_bp.login') }}">Log In</a></li>
       </ul>
       {% endif %}
     </div>
   </nav>
+
+  <!-- Flash messages will be shown here -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-secondary alert-dismissible fade show text-center" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
 
   <div class="container mt-4">
     {% block content %}

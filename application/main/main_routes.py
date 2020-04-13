@@ -1,7 +1,9 @@
 """Routes for logged in users."""
 
 from .. import db
-from flask import Blueprint, render_template, session, request, abort
+from datetime import datetime
+from flask import (Blueprint, render_template,
+                   session, request, abort, flash, redirect, url_for)
 
 
 # Set up a blueprint
@@ -33,40 +35,66 @@ def books():
                              {"search_term": '%' + search_term.lower() + '%'}).fetchall()
 
         return render_template("books.html",
+                               term=search_term,
                                search_term=search_term,
                                results=results)
     except Exception:
         abort(500)
 
 
-@main_bp.route("/book/<int:book_id>", methods=["GET", "POST"])
+@main_bp.route("/book/<int:book_id>")
+@main_bp.route("/book", defaults={"book_id": None}, methods=["POST"])
 def book(book_id):
     """View book."""
 
-    # Retrieve data of book_id
-    book = db.execute(
-        "SELECT * FROM books WHERE id = :id", {"id": book_id}).fetchone()
-
-    try:
-        book = db.execute(
-            "SELECT * FROM books WHERE id = :id", {"id": book_id}).fetchone()
-
-        if book:
-            return render_template("book.html",
-                                   title=book["title"],
-                                   author=book["author"],
-                                   year=book["year"],
-                                   isbn=book["isbn"])
-        else:
-            abort(400)
-    except Exception:
-        abort(500)
-
-
-@main_bp.route("/test")
-def test():
-    """View book page."""
+    # When user submits a review
     if request.method == "POST":
         rating = request.form.get("rating")
-        return rating
-    return "try ag!"
+        comment = request.form.get("comment")
+        if rating:
+            # Submit review
+            try:
+                # Insert reveiw into db
+                db.execute("""INSERT INTO reviews (user_id, book_id, rating, comment, posted_on)
+                                VALUES (:user_id, :book_id, :rating, :comment, :posted_on)""",
+                           {"user_id": session["user_id"],
+                            "book_id": session["book_id"],
+                            "rating": rating,
+                            "comment": comment,
+                            "posted_on": datetime.utcnow()})
+                db.commit()
+                return redirect(url_for('.book', book_id=session["book_id"]))
+
+            except Exception:
+                abort(500)
+        else:
+            flash("Please give a rating to submit review.")
+            return redirect(url_for('.book', book_id=session["book_id"]))
+
+    else:
+        # Save the book id if the user come here by GET method
+        session["book_id"] = book_id
+
+        try:
+            # Check if user has any past review
+            past_review = db.execute("""SELECT * FROM reviews WHERE user_id = :user_id
+                                    AND book_id = :book_id""",
+                                     {"user_id": session["user_id"],
+                                      "book_id": session["book_id"]}).fetchone()
+
+            # Get book information
+            book = db.execute("""SELECT * FROM books WHERE id = :id""",
+                              {"id": book_id}).fetchone()
+
+            if book:
+                return render_template("book.html",
+                                       term=book["title"],
+                                       title=book["title"],
+                                       author=book["author"],
+                                       year=book["year"],
+                                       isbn=book["isbn"],
+                                       past_review=past_review)
+            else:
+                abort(400)
+        except Exception:
+            abort(500)
