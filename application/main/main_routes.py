@@ -1,5 +1,7 @@
 """Routes for logged in users."""
 
+import os
+import requests
 from .. import db
 from datetime import datetime
 from flask import (Blueprint, render_template,
@@ -61,7 +63,7 @@ def book(book_id):
                             "book_id": session["book_id"],
                             "rating": rating,
                             "comment": comment,
-                            "posted_on": datetime.utcnow()})
+                            "posted_on": datetime.utcnow().date()})
                 db.commit()
                 return redirect(url_for('.book', book_id=session["book_id"]))
 
@@ -77,10 +79,6 @@ def book(book_id):
 
         try:
 
-            # Get book information
-            book = db.execute("""SELECT * FROM books WHERE id = :id""",
-                              {"id": book_id}).fetchone()
-
             # Get all reviews for a book
             reviews = db.execute("""SELECT username, rating, comment, posted_on
                                 FROM reviews
@@ -94,6 +92,23 @@ def book(book_id):
                 if review["username"] == session["username"]:
                     past_review = True
 
+            # Get rating from Goodread
+            key = os.environ.get("api_key")
+            book = db.execute("""SELECT isbn FROM books WHERE id = :book_id""",
+                              {"book_id": book_id}).fetchone()
+            isbn = book["isbn"]
+            # print(isbn)
+            response = requests.get("https://www.goodreads.com/book/review_counts.json",
+                                    params={"key": key, "isbns": isbn})
+            goodread_info = response.json()
+            avg_rating = goodread_info["books"][0]["average_rating"]
+            total_rating = goodread_info["books"][0]["work_ratings_count"]
+            print(avg_rating, total_rating)
+
+            # Get book information
+            book = db.execute("""SELECT * FROM books WHERE id = :id""",
+                              {"id": book_id}).fetchone()
+
             if book:
                 return render_template("book.html",
                                        term=book["title"],
@@ -103,7 +118,9 @@ def book(book_id):
                                        year=book["year"],
                                        isbn=book["isbn"],
                                        past_review=past_review,
-                                       reviews=reviews)
+                                       reviews=reviews,
+                                       avg_rating=avg_rating,
+                                       total_rating=total_rating)
             else:
                 abort(400)
         except Exception:
