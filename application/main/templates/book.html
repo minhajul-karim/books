@@ -49,40 +49,19 @@
         {% endif %}
     </div>
 </div>
-
 <hr>
+
+{% for review in reviews %}
 <div class="row">
     <div class="col-md-6">
-        <h4>Minhajul</h4>
+        <h4>{{ review["username"] }}</h4>
+        <p class="small text-muted">{{ review["posted_on"] }}</p>
     </div>
     <div class="col-md-6">
-        <p>Rating: 4</p>
-        <p>This is a long review about the book. The rating is given above. Of course, a user has to be logged in
-            before writing a reveiw. Otherwise, a message to log in will be displayed.</p>
+        <p>Rating: {{ review["rating"] }}</p>
+        <p>{{ review["comment"] }}</p>
     </div>
 </div>
-
 <hr>
-<div class="row">
-    <div class="col-md-6">
-        <h4>Karim</h4>
-    </div>
-    <div class="col-md-6">
-        <p>Rating: 3</p>
-        <p>This is a long review about the book. The rating is given above. Of course, a user has to be logged in
-            before writing a reveiw. Otherwise, a message to log in will be displayed.</p>
-    </div>
-</div>
-
-<hr>
-<div class="row">
-    <div class="col-md-6">
-        <h4>Asma</h4>
-    </div>
-    <div class="col-md-6">
-        <p>Rating: 5</p>
-        <p>This is a long review about the book. The rating is given above. Of course, a user has to be logged in
-            before writing a reveiw. Otherwise, a message to log in will be displayed.</p>
-    </div>
-</div>
+{% endfor %}
 {% endblock %}

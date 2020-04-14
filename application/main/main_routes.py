@@ -76,24 +76,34 @@ def book(book_id):
         session["book_id"] = book_id
 
         try:
-            # Check if user has any past review
-            past_review = db.execute("""SELECT * FROM reviews WHERE user_id = :user_id
-                                    AND book_id = :book_id""",
-                                     {"user_id": session["user_id"],
-                                      "book_id": session["book_id"]}).fetchone()
 
             # Get book information
             book = db.execute("""SELECT * FROM books WHERE id = :id""",
                               {"id": book_id}).fetchone()
 
+            # Get all reviews for a book
+            reviews = db.execute("""SELECT username, rating, comment, posted_on
+                                FROM reviews
+                                INNER JOIN users ON users.id = reviews.user_id
+                                WHERE book_id = :book_id""",
+                                 {"book_id": book_id}).fetchall()
+
+            # Check if user has any past review
+            past_review = False
+            for review in reviews:
+                if review["username"] == session["username"]:
+                    past_review = True
+
             if book:
                 return render_template("book.html",
                                        term=book["title"],
+                                       search_term=book["title"],
                                        title=book["title"],
                                        author=book["author"],
                                        year=book["year"],
                                        isbn=book["isbn"],
-                                       past_review=past_review)
+                                       past_review=past_review,
+                                       reviews=reviews)
             else:
                 abort(400)
         except Exception:
