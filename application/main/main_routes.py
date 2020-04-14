@@ -74,9 +74,6 @@ def book(book_id):
             return redirect(url_for('.book', book_id=session["book_id"]))
 
     else:
-        # Save the book id if the user come here by GET method
-        session["book_id"] = book_id
-
         try:
 
             # Get all reviews for a book
@@ -86,24 +83,26 @@ def book(book_id):
                                 WHERE book_id = :book_id""",
                                  {"book_id": book_id}).fetchall()
 
-            # Check if user has any past review
+            # Check logged in user's past reviews
             past_review = False
-            for review in reviews:
-                if review["username"] == session["username"]:
-                    past_review = True
+            if session:
+                # Save book_id to seeion
+                session["book_id"] = book_id
+                # print(session["book_id"])
+                for review in reviews:
+                    if review["username"] == session["username"]:
+                        past_review = True
 
             # Get rating from Goodread
             key = os.environ.get("api_key")
             book = db.execute("""SELECT isbn FROM books WHERE id = :book_id""",
                               {"book_id": book_id}).fetchone()
             isbn = book["isbn"]
-            # print(isbn)
             response = requests.get("https://www.goodreads.com/book/review_counts.json",
                                     params={"key": key, "isbns": isbn})
             goodread_info = response.json()
             avg_rating = goodread_info["books"][0]["average_rating"]
             total_rating = goodread_info["books"][0]["work_ratings_count"]
-            print(avg_rating, total_rating)
 
             # Get book information
             book = db.execute("""SELECT * FROM books WHERE id = :id""",

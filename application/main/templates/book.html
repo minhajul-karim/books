@@ -9,7 +9,10 @@
     <div class="col-sm-6">
         <h1>{{ title | title }} </h1>
         <p>by {{ author | title }}</p>
-        <p>Goodread: Avg. {{ avg_rating }} / {{ total_rating }} rating.</p>
+        <p>
+            Avg. {{ avg_rating }} / {{ total_rating }} rating.
+            <span class="badge badge-secondary">Goodread</span>
+        </p>
         <p>Year of publication: {{ year }}</p>
         <p>ISBN: {{ isbn }}</p>
     </div>

@@ -11,13 +11,13 @@ if not os.environ.get("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
 
-# @app.errorhandler(500)
-# def intrenal_server_error(error):
-#     """View template for 500 errors."""
-#     return render_template("error.html",
-#                            error_code=500,
-#                            error_message="""Sorry! It's not you, it's us.
-#                            Please try again."""), 500
+@app.errorhandler(500)
+def intrenal_server_error(error):
+    """View template for 500 errors."""
+    return render_template("error.html",
+                           error_code=500,
+                           error_message="""Sorry! It's not you, it's us.
+                           Please try again."""), 500
 
 
 @app.errorhandler(404)
