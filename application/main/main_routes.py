@@ -85,10 +85,9 @@ def book(book_id):
 
             # Check logged in user's past reviews
             past_review = False
-            if session:
+            if "user_id" in session:
                 # Save book_id to seeion
                 session["book_id"] = book_id
-                # print(session["book_id"])
                 for review in reviews:
                     if review["username"] == session["username"]:
                         past_review = True
