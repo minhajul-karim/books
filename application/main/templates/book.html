@@ -47,7 +47,7 @@
         {% elif not session.username %}
         <p class="lead text-center py-3">
             Please log in to write review.
-            <button type="submit" class="btn btn-outline-primary ml-2">Log in</button>
+            <a class="btn btn-outline-primary" href="{{ url_for('auth_bp.login') }}" role="button">Log In</a>
         </p>
         {% endif %}
     </div>

@@ -1,8 +1,6 @@
 """Routes for logged in users."""
 
-import os
-import requests
-from .. import db
+from .. import db, lookup
 from datetime import datetime
 from flask import (Blueprint, render_template,
                    session, request, abort, flash, redirect, url_for)
@@ -74,6 +72,7 @@ def book(book_id):
             return redirect(url_for('.book', book_id=session["book_id"]))
 
     else:
+        # When user visits a book page
         try:
 
             # Get all reviews for a book
@@ -92,22 +91,15 @@ def book(book_id):
                     if review["username"] == session["username"]:
                         past_review = True
 
-            # Get rating from Goodread
-            key = os.environ.get("api_key")
-            book = db.execute("""SELECT isbn FROM books WHERE id = :book_id""",
-                              {"book_id": book_id}).fetchone()
-            isbn = book["isbn"]
-            response = requests.get("https://www.goodreads.com/book/review_counts.json",
-                                    params={"key": key, "isbns": isbn})
-            goodread_info = response.json()
-            avg_rating = goodread_info["books"][0]["average_rating"]
-            total_rating = goodread_info["books"][0]["work_ratings_count"]
-
             # Get book information
             book = db.execute("""SELECT * FROM books WHERE id = :id""",
                               {"id": book_id}).fetchone()
 
             if book:
+
+                # Get rating from Goodread
+                goodread_info = lookup(book["isbn"])
+
                 return render_template("book.html",
                                        term=book["title"],
                                        search_term=book["title"],
@@ -117,9 +109,10 @@ def book(book_id):
                                        isbn=book["isbn"],
                                        past_review=past_review,
                                        reviews=reviews,
-                                       avg_rating=avg_rating,
-                                       total_rating=total_rating)
+                                       avg_rating=goodread_info["avg_rating"],
+                                       total_rating=goodread_info["total_rating"])
             else:
                 abort(400)
+
         except Exception:
             abort(500)
