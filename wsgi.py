@@ -10,6 +10,10 @@ app = create_app()
 if not os.environ.get("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
+# Check for api key
+if not os.environ.get("API_KEY"):
+    raise RuntimeError("API key is not set")
+
 
 @app.errorhandler(500)
 def intrenal_server_error(error):
