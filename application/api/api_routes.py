@@ -25,10 +25,10 @@ def api(isbn):
                 {
                     "title": book["title"].title(),
                     "author": book["author"].title(),
-                    "year": book["year"],
+                    "year": int(book["year"]),
                     "isbn": book["isbn"],
-                    "review_count": goodread_info["total_rating"],
-                    "average_score": goodread_info["avg_rating"]
+                    "review_count": int(goodread_info["total_rating"]),
+                    "average_score": float(goodread_info["avg_rating"])
                 })
         else:
             return make_response(jsonify(
