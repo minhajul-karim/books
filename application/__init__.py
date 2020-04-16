@@ -47,7 +47,7 @@ def lookup(isbn):
 
     # Contact API
     try:
-        key = os.environ.get("api_key")
+        key = os.environ.get("API_KEY")
         response = requests.get("https://www.goodreads.com/book/review_counts.json",
                                 params={"key": key, "isbns": isbn})
 
