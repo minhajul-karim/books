@@ -79,7 +79,8 @@ def book(book_id):
             reviews = db.execute("""SELECT username, rating, comment, posted_on
                                 FROM reviews
                                 INNER JOIN users ON users.id = reviews.user_id
-                                WHERE book_id = :book_id""",
+                                WHERE book_id = :book_id
+                                ORDER BY posted_on DESC""",
                                  {"book_id": book_id}).fetchall()
 
             # Check logged in user's past reviews
@@ -116,3 +117,10 @@ def book(book_id):
 
         except Exception:
             abort(500)
+
+
+@main_bp.route("/test")
+def test():
+    rating = request.args.get("rating")
+    print(rating)
+    return rating

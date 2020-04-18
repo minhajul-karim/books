@@ -94,6 +94,7 @@ def login():
         if check_password_hash(user["password"], password):
             session["username"] = username
             session["user_id"] = user["id"]
+            flash("Welcome, " + session["username"])
             return redirect(url_for('main_bp.home'))
 
         flash("Invalid username/password!")

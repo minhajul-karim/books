@@ -93,57 +93,57 @@ body, html {
 
 
 /* Ratings and reviews style */
-/* Source: https://stackoverflow.com/questions/8118266/integrating-css-star-rating-into-an-html-form */
+/* Source: https://codepen.io/mmoradi08/pen/yLyYrGg?editors=1010 */
 
-.rating {
-    float: left;
-    border: none;
-  }
 
-  .rating:not(:checked)>input {
-    position: absolute;
-    top: -9999px;
-    clip: rect(0, 0, 0, 0);
-  }
+#review-area {
+                
+    .rating-stars a {
+        color: tomato;
+        text-decoration: none;
+      }
+      
+    .rating-stars a:hover {
+        color: #2196f3;
+      }
+      
+      /* Rating Star Widgets Style */
+      .rating-stars ul {
+        list-style-type: none;
+        padding: 0;
+        
+        -moz-user-select: none;
+        -webkit-user-select: none;
+      }
 
-  .rating:not(:checked)>label {
-    float: right;
-    width: 1em;
-    padding: 0 .1em;
-    overflow: hidden;
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: 200%;
-    line-height: 1.2;
-    color: #ddd;
-  }
+      .rating-stars ul > li.star {
+        display: inline-block;
+        
+      }
+      
+      /* Idle State of the stars */
+      .rating-stars ul > li.star > i.fa {
+        font-size: 1.5em; /* Change the size of the stars */
+        color:#ccc; /* Color on idle state */
+      }
+      
+      /* Hover state of the stars */
+      .rating-stars ul > li.star.hover > i.fa {
+        color:#FFCC36;
+      }
+      
+      /* Selected state of the stars */
+      .rating-stars ul > li.star.selected > i.fa {
+        color:#FF912C;
+      }
 
-  .rating:not(:checked)>label:before {
-    content: '★ ';
-  }
+      #rating-input {
+          display: none;
+      }
 
-  .rating>input:checked~label {
-    color: #f70;
-  }
+}
 
-  .rating:not(:checked)>label:hover,
-  .rating:not(:checked)>label:hover~label {
-    color: gold;
-  }
-
-  .rating>input:checked+label:hover,
-  .rating>input:checked+label:hover~label,
-  .rating>input:checked~label:hover,
-  .rating>input:checked~label:hover~label,
-  .rating>label:hover~input:checked~label {
-    color: #ea0;
-  }
-
-  .rating>label:active {
-    position: relative;
-  }
-
-/* R&R style ends */
+/* Rating ends */
 
 /* Footer */
 footer {
@@ -179,7 +179,7 @@ $breakpoint-mobile: 576px;
     }
 
     #search-form {
-        margin-top: 120px;
+        margin-top: 100px;
         input[type="text"] {
             width: auto;
         }
