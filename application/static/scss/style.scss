@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     height: 100%;
     margin: 0;
 }
@@ -11,7 +12,8 @@ body, html {
 
 #home-wrapper {
     @extend %wrapper;
-    background: url("https://source.unsplash.com/1600x900/?books") no-repeat center;
+    background: url("https://source.unsplash.com/1600x900/?books") no-repeat
+        center;
     background-size: cover;
 }
 
@@ -20,7 +22,7 @@ body, html {
 }
 
 .navbar {
-    padding: .5rem 3rem;
+    padding: 0.5rem 3rem;
 }
 
 .navbar-brand {
@@ -59,13 +61,13 @@ body, html {
 
 /* only used for background overlay not needed for centering */
 #auth-form:before {
-    content: '';
+    content: "";
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
     width: 100%;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: -1;
     border-radius: 10px;
 }
@@ -90,57 +92,51 @@ body, html {
     overflow: hidden;
 }
 
-
-
 /* Ratings and reviews style */
 /* Source: https://codepen.io/mmoradi08/pen/yLyYrGg?editors=1010 */
 
-
 #review-area {
-                
     .rating-stars a {
         color: tomato;
         text-decoration: none;
-      }
-      
+    }
+
     .rating-stars a:hover {
         color: #2196f3;
-      }
-      
-      /* Rating Star Widgets Style */
-      .rating-stars ul {
+    }
+
+    /* Rating Star Widgets Style */
+    .rating-stars ul {
         list-style-type: none;
         padding: 0;
-        
+
         -moz-user-select: none;
         -webkit-user-select: none;
-      }
+    }
 
-      .rating-stars ul > li.star {
+    .rating-stars ul > li.star {
         display: inline-block;
-        
-      }
-      
-      /* Idle State of the stars */
-      .rating-stars ul > li.star > i.fa {
+    }
+
+    /* Idle State of the stars */
+    .rating-stars ul > li.star > i.fa {
         font-size: 1.5em; /* Change the size of the stars */
-        color:#ccc; /* Color on idle state */
-      }
-      
-      /* Hover state of the stars */
-      .rating-stars ul > li.star.hover > i.fa {
-        color:#FFCC36;
-      }
-      
-      /* Selected state of the stars */
-      .rating-stars ul > li.star.selected > i.fa {
-        color:#FF912C;
-      }
+        color: #ccc; /* Color on idle state */
+    }
 
-      #rating-input {
-          display: none;
-      }
+    /* Hover state of the stars */
+    .rating-stars ul > li.star.hover > i.fa {
+        color: #ffcc36;
+    }
 
+    /* Selected state of the stars */
+    .rating-stars ul > li.star.selected > i.fa {
+        color: #ff912c;
+    }
+
+    #rating-input {
+        display: none;
+    }
 }
 
 /* Rating ends */
@@ -151,6 +147,10 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
+
+    .github {
+        color: #ffc107;
+    }
 }
 
 /* Error page style */
@@ -171,7 +171,7 @@ footer {
 $breakpoint-mobile: 576px;
 @media (max-width: $breakpoint-mobile) {
     .navbar {
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
     }
 
     #nav-search {
