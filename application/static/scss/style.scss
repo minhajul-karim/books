@@ -15,6 +15,8 @@ html {
     background: url("https://source.unsplash.com/1600x900/?books") no-repeat
         center;
     background-size: cover;
+    background-color: #656060;
+    background-blend-mode: multiply;
 }
 
 #search-wrapper {
@@ -109,9 +111,6 @@ html {
     .rating-stars ul {
         list-style-type: none;
         padding: 0;
-
-        -moz-user-select: none;
-        -webkit-user-select: none;
     }
 
     .rating-stars ul > li.star {
@@ -119,18 +118,18 @@ html {
     }
 
     /* Idle State of the stars */
-    .rating-stars ul > li.star > i.fa {
+    .rating-stars ul > li.star > .fa-star {
         font-size: 1.5em; /* Change the size of the stars */
         color: #ccc; /* Color on idle state */
     }
 
     /* Hover state of the stars */
-    .rating-stars ul > li.star.hover > i.fa {
+    .rating-stars ul > li.star.hover > .fa-star {
         color: #ffcc36;
     }
 
     /* Selected state of the stars */
-    .rating-stars ul > li.star.selected > i.fa {
+    .rating-stars ul > li.star.selected > .fa-star {
         color: #ff912c;
     }
 

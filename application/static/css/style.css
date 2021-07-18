@@ -1,189 +1,187 @@
 body,
 html {
-    height: 100%;
-    margin: 0;
+  height: 100%;
+  margin: 0;
 }
 
-#home-wrapper,
-#search-wrapper {
-    position: relative;
-    min-height: 100%;
-    padding-bottom: 80px;
+#home-wrapper, #search-wrapper {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 80px;
 }
 
 #home-wrapper {
-    background: url("https://source.unsplash.com/1600x900/?books") no-repeat
-        center;
-    background-size: cover;
+  background: url("https://source.unsplash.com/1600x900/?books") no-repeat center;
+  background-size: cover;
+  background-color: #656060;
+  background-blend-mode: multiply;
 }
 
 .navbar {
-    padding: 0.5rem 3rem;
+  padding: 0.5rem 3rem;
 }
 
 .navbar-brand {
-    color: #fff !important;
-    font-weight: bold;
-    font-size: 30px;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .nav-link {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 #search-form {
-    margin-top: 180px;
+  margin-top: 180px;
 }
 
 #search-form input[type="text"] {
-    width: 500px;
+  width: 500px;
 }
 
 /* Signup and Login form style */
 #cover {
-    margin-top: 70px;
-    text-align: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    position: relative;
+  margin-top: 70px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
 }
 
 #cover-caption {
-    width: 100%;
-    position: relative;
-    z-index: 1;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 /* only used for background overlay not needed for centering */
 #auth-form:before {
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: -1;
-    border-radius: 10px;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+  border-radius: 10px;
 }
 
 /* Books page sytle */
 .text-decoration-none:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /* Book page */
 #image-section #image-box {
-    width: 250px;
-    height: 300px;
-    margin: 0 auto;
+  width: 250px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 #image-box img {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
-    display: block;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  overflow: hidden;
 }
 
 /* Ratings and reviews style */
 /* Source: https://codepen.io/mmoradi08/pen/yLyYrGg?editors=1010 */
 #review-area {
-    /* Rating Star Widgets Style */
-    /* Idle State of the stars */
-    /* Hover state of the stars */
-    /* Selected state of the stars */
+  /* Rating Star Widgets Style */
+  /* Idle State of the stars */
+  /* Hover state of the stars */
+  /* Selected state of the stars */
 }
 
 #review-area .rating-stars a {
-    color: tomato;
-    text-decoration: none;
+  color: tomato;
+  text-decoration: none;
 }
 
 #review-area .rating-stars a:hover {
-    color: #2196f3;
+  color: #2196f3;
 }
 
 #review-area .rating-stars ul {
-    list-style-type: none;
-    padding: 0;
-    -moz-user-select: none;
-    -webkit-user-select: none;
+  list-style-type: none;
+  padding: 0;
 }
 
 #review-area .rating-stars ul > li.star {
-    display: inline-block;
+  display: inline-block;
 }
 
-#review-area .rating-stars ul > li.star > i.fa {
-    font-size: 1.5em;
-    /* Change the size of the stars */
-    color: #ccc;
-    /* Color on idle state */
+#review-area .rating-stars ul > li.star > .fa-star {
+  font-size: 1.5em;
+  /* Change the size of the stars */
+  color: #ccc;
+  /* Color on idle state */
 }
 
-#review-area .rating-stars ul > li.star.hover > i.fa {
-    color: #ffcc36;
+#review-area .rating-stars ul > li.star.hover > .fa-star {
+  color: #ffcc36;
 }
 
-#review-area .rating-stars ul > li.star.selected > i.fa {
-    color: #ff912c;
+#review-area .rating-stars ul > li.star.selected > .fa-star {
+  color: #ff912c;
 }
 
 #review-area #rating-input {
-    display: none;
+  display: none;
 }
 
 /* Rating ends */
 /* Footer */
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 footer .github {
-    color: #ffc107;
+  color: #ffc107;
 }
 
 /* Error page style */
 #error {
-    margin-top: 120px;
+  margin-top: 120px;
 }
 
 #error h1 {
-    font-weight: bold;
-    font-size: 150px;
+  font-weight: bold;
+  font-size: 150px;
 }
 
 #error p {
-    font-size: 30px;
-    font-weight: bold;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 @media (max-width: 576px) {
-    .navbar {
-        padding: 0.5rem 1rem;
-    }
-    #nav-search {
-        margin-bottom: 10px;
-    }
-    #search-form {
-        margin-top: 100px;
-    }
-    #search-form input[type="text"] {
-        width: auto;
-    }
-    #image-section #image-box {
-        margin-left: 2px;
-        margin-bottom: 15px;
-    }
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+  #nav-search {
+    margin-bottom: 10px;
+  }
+  #search-form {
+    margin-top: 100px;
+  }
+  #search-form input[type="text"] {
+    width: auto;
+  }
+  #image-section #image-box {
+    margin-left: 2px;
+    margin-bottom: 15px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

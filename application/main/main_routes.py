@@ -92,6 +92,7 @@ def book(book_id):
                     if review["username"] == session["username"]:
                         past_review = True
 
+            print(past_review)
             # Get book information
             book = db.execute("""SELECT * FROM books WHERE id = :id""",
                               {"id": book_id}).fetchone()
@@ -99,7 +100,7 @@ def book(book_id):
             if book:
 
                 # Get rating from Goodread
-                goodread_info = lookup(book["isbn"])
+                # goodread_info = lookup(book["isbn"])
 
                 return render_template("book.html",
                                        term=book["title"],
@@ -109,9 +110,7 @@ def book(book_id):
                                        year=book["year"],
                                        isbn=book["isbn"],
                                        past_review=past_review,
-                                       reviews=reviews,
-                                       avg_rating=goodread_info["avg_rating"],
-                                       total_rating=goodread_info["total_rating"])
+                                       reviews=reviews)
             else:
                 abort(400)
 
